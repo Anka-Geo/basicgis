@@ -1,0 +1,21 @@
+<p-splitter [style]="{'height': '100%'}">
+    <ng-template pTemplate>
+        <div class="col flex align-items-center justify-content-center" style="width: 100%;height: 100%;">
+            <bg-map></bg-map>
+        </div>
+    </ng-template>
+    <ng-template pTemplate>
+            <p-splitter layout="vertical">
+                <ng-template pTemplate>
+                    <div class="col flex align-items-center justify-content-center">
+                        PANO
+                    </div>
+                </ng-template>
+                <ng-template pTemplate>
+                    <div class="col flex align-items-center justify-content-center">
+                        3D
+                    </div>
+                </ng-template>
+            </p-splitter>
+    </ng-template>
+</p-splitter>
