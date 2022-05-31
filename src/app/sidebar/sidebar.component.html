@@ -1,3 +1,11 @@
 <p-sidebar [(visible)]="display" position="left" [modal]=false [showCloseIcon]=false>
-    Content
+    <p-accordion>
+        <p-accordionTab *ngFor="let service of services" [header]="service.name">
+            <div style="display: flex;flex-direction: row;justify-content: space-between;margin-bottom:3px"
+                *ngFor="let layer of service.layers">
+                <div>{{layer.alias}}</div>
+                <p-checkbox (onChange)="changeLayerVisibility($event , layer)" [binary]="true"></p-checkbox>
+            </div>
+        </p-accordionTab>
+    </p-accordion>
 </p-sidebar>

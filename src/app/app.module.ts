@@ -1,3 +1,4 @@
+import { LayerDirective } from './main/map/layer.directive';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -6,14 +7,21 @@ import { AppComponent } from './app.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { MainComponent } from './main/main.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
-import {SidebarModule} from 'primeng/sidebar';
-import {ButtonModule} from 'primeng/button';
-import {SplitterModule} from 'primeng/splitter';
+import { SidebarModule } from 'primeng/sidebar';
+import { ButtonModule } from 'primeng/button';
+import { SplitterModule } from 'primeng/splitter';
+import { AccordionModule } from 'primeng/accordion';
+import { CheckboxModule } from 'primeng/checkbox';
+
+
 import { MapComponent } from './main/map/map.component';
+import { TileLayerDirective } from './main/map/tile-layer.directive';
 
-const primengModules = [SidebarModule , ButtonModule, SplitterModule]
+const primengModules = [SidebarModule, ButtonModule, SplitterModule,
+  AccordionModule, CheckboxModule]
 
 
 @NgModule({
@@ -22,12 +30,15 @@ const primengModules = [SidebarModule , ButtonModule, SplitterModule]
     SidebarComponent,
     ToolbarComponent,
     MainComponent,
-    MapComponent
+    MapComponent,
+    TileLayerDirective,
+    LayerDirective
   ],
   imports: [
     BrowserModule,
     ...primengModules,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

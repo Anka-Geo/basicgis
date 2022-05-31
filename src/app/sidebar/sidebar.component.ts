@@ -1,3 +1,4 @@
+import { LayerService } from './../services/layer.service';
 import { SidebarService } from './../services/sidebar.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,16 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  display  = false;
-  constructor(public sidebarService : SidebarService) { }
+  display = false;
+  services: any;
+  constructor(public sidebarService: SidebarService, private layerService: LayerService) { }
 
   ngOnInit(): void {
 
     this.sidebarService.sidebarOpened.subscribe(res => {
-      console.log(res);
-      
       this.display = res;
     })
+
+    this.layerService.services.subscribe(services => {
+      this.services = services;
+      console.log(this.services);
+
+    })
+  }
+
+  changeLayerVisibility(event: any, layer: any) {
+    layer.visible = event.checked
   }
 
 }

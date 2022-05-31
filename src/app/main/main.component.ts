@@ -1,3 +1,4 @@
+import { LayerService } from './../services/layer.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  services: any;
+
+  constructor(private layerService: LayerService) { }
 
   ngOnInit(): void {
+
+    this.layerService.services.subscribe(services => {
+      this.services = services;
+    })
   }
 
 }
