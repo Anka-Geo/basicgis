@@ -19,6 +19,8 @@ import { CheckboxModule } from 'primeng/checkbox';
 
 import { MapComponent } from './main/map/map.component';
 import { TileLayerDirective } from './main/map/tile-layer.directive';
+import { PanoComponent } from './main/pano/pano.component';
+import { PanoWfsLayerDirective } from './main/pano/pano-wfs-layer.directive';
 
 const primengModules = [SidebarModule, ButtonModule, SplitterModule,
   AccordionModule, CheckboxModule]
@@ -32,7 +34,9 @@ const primengModules = [SidebarModule, ButtonModule, SplitterModule,
     MainComponent,
     MapComponent,
     TileLayerDirective,
-    LayerDirective
+    LayerDirective,
+    PanoComponent,
+    PanoWfsLayerDirective
   ],
   imports: [
     BrowserModule,

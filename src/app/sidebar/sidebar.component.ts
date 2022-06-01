@@ -21,8 +21,6 @@ export class SidebarComponent implements OnInit {
 
     this.layerService.services.subscribe(services => {
       this.services = services;
-      console.log(this.services);
-
     })
   }
 

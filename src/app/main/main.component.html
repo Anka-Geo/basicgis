@@ -4,7 +4,8 @@
             <bg-map>
                 <ng-container *ngFor="let service of services">
                     <bgTileLayer *ngIf="service.type === 'VECTOR'" [url]="service.url">
-                        <bgLayer *ngFor="let layer of service.layers" [visible]="layer.visible" [layerName]="layer.name"></bgLayer>
+                        <bgLayer *ngFor="let layer of service.layers" [visible]="layer.visible"
+                            [layerName]="layer.name"></bgLayer>
                     </bgTileLayer>
                 </ng-container>
 
@@ -12,17 +13,21 @@
         </div>
     </ng-template>
     <ng-template pTemplate>
-        <p-splitter layout="vertical">
-            <ng-template pTemplate>
-                <div class="col flex align-items-center justify-content-center">
-                    PANO
-                </div>
-            </ng-template>
-            <ng-template pTemplate>
-                <div class="col flex align-items-center justify-content-center">
-                    3D
-                </div>
-            </ng-template>
-        </p-splitter>
+        <div style="height:100%;width: 100%;display: flex;flex-direction: column;">
+            <div style="height:50%;background-color: aqua;">
+                <bg-pano>
+                    <ng-container *ngFor="let service of services">
+                        <ng-container *ngIf="service.type === 'VECTOR'">
+                            <bg-pano-wfsLayer *ngFor="let layer of service.layers" [url]="service.url"
+                                [name]="layer.name" [visible]="layer.visible">
+                            </bg-pano-wfsLayer>
+                        </ng-container>
+                    </ng-container>
+                </bg-pano>
+            </div>
+            <div style="height:50%;background-color: brown;">
+                3D
+            </div>
+        </div>
     </ng-template>
 </p-splitter>
