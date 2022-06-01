@@ -21,6 +21,8 @@ import { MapComponent } from './main/map/map.component';
 import { TileLayerDirective } from './main/map/tile-layer.directive';
 import { PanoComponent } from './main/pano/pano.component';
 import { PanoWfsLayerDirective } from './main/pano/pano-wfs-layer.directive';
+import { ThreedComponent } from './main/threed/threed.component';
+import { GeojsonLayerDirective } from './main/threed/geojson-layer.directive';
 
 const primengModules = [SidebarModule, ButtonModule, SplitterModule,
   AccordionModule, CheckboxModule]
@@ -36,7 +38,9 @@ const primengModules = [SidebarModule, ButtonModule, SplitterModule,
     TileLayerDirective,
     LayerDirective,
     PanoComponent,
-    PanoWfsLayerDirective
+    PanoWfsLayerDirective,
+    ThreedComponent,
+    GeojsonLayerDirective
   ],
   imports: [
     BrowserModule,
