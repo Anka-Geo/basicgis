@@ -1,3 +1,4 @@
+import { DrawManagerService, DrawTypes } from './../services/draw-manager.service';
 import { LayerService } from './../services/layer.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,13 +10,22 @@ import { Component, OnInit } from '@angular/core';
 export class MainComponent implements OnInit {
 
   services: any;
+  drawStatus: DrawTypes | undefined;
 
-  constructor(private layerService: LayerService) { }
+  get drawTypes() {
+    return DrawTypes;
+  }
+
+  constructor(private layerService: LayerService, private drawManager: DrawManagerService) { }
 
   ngOnInit(): void {
 
     this.layerService.services.subscribe(services => {
       this.services = services;
+    })
+
+    this.drawManager.startDraw.subscribe(res => {
+      this.drawStatus = res;
     })
   }
 

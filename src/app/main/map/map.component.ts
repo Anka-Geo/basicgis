@@ -5,6 +5,8 @@ import OSM from 'ol/source/OSM';
 import TileLayer from 'ol/layer/Tile';
 import View from 'ol/View';
 import { fromLonLat } from 'ol/proj';
+import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
 
 @Component({
   selector: 'bg-map',
@@ -14,7 +16,7 @@ import { fromLonLat } from 'ol/proj';
 export class MapComponent implements AfterViewInit {
 
   mapInitilized: ReplaySubject<Map> = new ReplaySubject()
-
+  drawLayer : VectorLayer<VectorSource> | undefined;
   // map : any;
 
   constructor() { }
@@ -31,6 +33,12 @@ export class MapComponent implements AfterViewInit {
     map.addLayer(new TileLayer({
       source: new OSM(),
     }))
+
+    this.drawLayer = new VectorLayer({
+      source: new VectorSource()
+    })
+
+    map.addLayer(this.drawLayer);
 
     this.mapInitilized.next(map);
 

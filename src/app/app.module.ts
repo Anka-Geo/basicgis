@@ -24,6 +24,7 @@ import { PanoWfsLayerDirective } from './main/pano/pano-wfs-layer.directive';
 import { ThreedComponent } from './main/threed/threed.component';
 import { GeojsonLayerDirective } from './main/threed/geojson-layer.directive';
 import { TilesetLayerDirective } from './main/threed/tileset-layer.directive';
+import { MapDrawDirective } from './main/map/map-draw.directive';
 
 const primengModules = [SidebarModule, ButtonModule, SplitterModule,
   AccordionModule, CheckboxModule, MenubarModule]
@@ -42,7 +43,8 @@ const primengModules = [SidebarModule, ButtonModule, SplitterModule,
     PanoWfsLayerDirective,
     ThreedComponent,
     GeojsonLayerDirective,
-    TilesetLayerDirective
+    TilesetLayerDirective,
+    MapDrawDirective
   ],
   imports: [
     BrowserModule,

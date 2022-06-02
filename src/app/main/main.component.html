@@ -8,7 +8,9 @@
                             [layerName]="layer.name"></bgLayer>
                     </bgTileLayer>
                 </ng-container>
-
+                <bg-map-draw *ngIf="drawStatus === drawTypes.MAPPOINT || 
+                drawStatus === drawTypes.MAPLINESTRING || 
+                drawStatus === drawTypes.MAPPOLYGON" [drawType]="drawStatus"></bg-map-draw>
             </bg-map>
         </div>
     </ng-template>

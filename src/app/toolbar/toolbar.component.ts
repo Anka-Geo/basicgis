@@ -1,3 +1,4 @@
+import { DrawTypes, DrawManagerService } from './../services/draw-manager.service';
 import { SidebarService } from './../services/sidebar.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -11,14 +12,15 @@ export class ToolbarComponent implements OnInit {
   isSidebarOpen = false;
   items: any;
 
-  constructor(public sidebarService: SidebarService) { }
+  constructor(public sidebarService: SidebarService,
+    private drawManagerService: DrawManagerService) { }
 
   ngOnInit(): void {
     this.items = [
       {
         label: 'Point',
         items: [
-          { label: 'Map' , command:this.drawStart },
+          { label: 'Map', command: () => { this.drawManagerService.startDrawing(DrawTypes.MAPPOINT) } },
           { label: 'Panorama' },
           { label: 'Threed' }
         ]
@@ -26,7 +28,7 @@ export class ToolbarComponent implements OnInit {
       {
         label: 'Line',
         items: [
-          { label: 'Map' },
+          { label: 'Map', command: () => { this.drawManagerService.startDrawing(DrawTypes.MAPLINESTRING) } },
           { label: 'Panorama' },
           { label: 'Threed' }
         ]
@@ -34,7 +36,7 @@ export class ToolbarComponent implements OnInit {
       {
         label: 'Polygon',
         items: [
-          { label: 'Map' },
+          { label: 'Map', command: () => { this.drawManagerService.startDrawing(DrawTypes.MAPPOLYGON) } },
           { label: 'Panorama' },
           { label: 'Threed' }
         ]
@@ -47,9 +49,9 @@ export class ToolbarComponent implements OnInit {
     this.sidebarService.sidebarOpened.next(this.isSidebarOpen);
   }
 
-  drawStart(){
+  drawStart(drawType: DrawTypes) {
     console.log("geldim");
-    
+
   }
 
 }
