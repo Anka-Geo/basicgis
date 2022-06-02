@@ -17,11 +17,12 @@ export class ThreedComponent implements OnInit {
       timeline: false,
       sceneModePicker: false,
       homeButton: false,
-      terrainProvider: createWorldTerrain()
+      // terrainProvider: createWorldTerrain()
     });
 
     const initialPosition = Cartesian3.fromDegrees(
-      30.498519,39.792018,
+      28.942838, 
+      41.042689,
       750
     );
     const initialOrientation = HeadingPitchRoll.fromDegrees(
