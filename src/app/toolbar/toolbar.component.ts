@@ -21,24 +21,24 @@ export class ToolbarComponent implements OnInit {
         label: 'Point',
         items: [
           { label: 'Map', command: () => { this.drawManagerService.startDrawing(DrawTypes.MAPPOINT) } },
-          { label: 'Panorama' },
-          { label: 'Threed' }
+          { label: 'Panorama', command: () => { this.drawManagerService.startDrawing(DrawTypes.PANOPOINT) } },
+          { label: 'Threed', command: () => { this.drawManagerService.startDrawing(DrawTypes.THREEDPOINT) } }
         ]
       },
       {
         label: 'Line',
         items: [
           { label: 'Map', command: () => { this.drawManagerService.startDrawing(DrawTypes.MAPLINESTRING) } },
-          { label: 'Panorama' },
-          { label: 'Threed' }
+          { label: 'Panorama', command: () => { this.drawManagerService.startDrawing(DrawTypes.PANOLINESTRING) } },
+          { label: 'Threed', command: () => { this.drawManagerService.startDrawing(DrawTypes.THREEDLINESTRING) } }
         ]
       },
       {
         label: 'Polygon',
         items: [
           { label: 'Map', command: () => { this.drawManagerService.startDrawing(DrawTypes.MAPPOLYGON) } },
-          { label: 'Panorama' },
-          { label: 'Threed' }
+          { label: 'Panorama', command: () => { this.drawManagerService.startDrawing(DrawTypes.PANOPOLYGON) } },
+          { label: 'Threed', command: () => { this.drawManagerService.startDrawing(DrawTypes.THREEDPOLYGON) } }
         ]
       }
     ];

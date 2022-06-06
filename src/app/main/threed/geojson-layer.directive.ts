@@ -37,7 +37,6 @@ export class GeojsonLayerDirective {
           this.geoserverLayer.entities.values.forEach((entity : any) => {
             entity.polygon.extrudedHeight = Math.random() * 100;
           });
-          // debugger
           this.threedComponent.viewer!.dataSources.add(this.geoserverLayer);
         })
     }else {

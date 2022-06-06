@@ -25,6 +25,9 @@
                             </bg-pano-wfsLayer>
                         </ng-container>
                     </ng-container>
+                    <bg-pano-draw *ngIf="drawStatus === drawTypes.PANOPOINT || 
+                    drawStatus === drawTypes.PANOLINESTRING || 
+                    drawStatus === drawTypes.PANOPOLYGON" [drawType]="drawStatus"></bg-pano-draw>
                 </bg-pano>
             </div>
             <div style="height:50%;background-color: brown;">

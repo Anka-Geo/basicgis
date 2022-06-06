@@ -1,4 +1,4 @@
-import { DrawTypes, DrawManagerService, DrawSource, BgFeature } from './../../services/draw-manager.service';
+import { DrawTypes, DrawManagerService, DrawSource, BgFeature, FeatureTypes } from './../../services/draw-manager.service';
 import { MapComponent } from './map.component';
 import { Directive, Input } from '@angular/core';
 import Draw from 'ol/interaction/Draw'
@@ -17,21 +17,18 @@ export class MapDrawDirective {
     switch (this.drawType) {
       case DrawTypes.MAPPOINT:
         this.draw = new Draw({
-          type: 'Point',
-          source:this.mapComponent.drawLayer?.getSource()!
+          type: 'Point'
         });
 
         break;
       case DrawTypes.MAPLINESTRING:
         this.draw = new Draw({
-          type: 'LineString',
-          source:this.mapComponent.drawLayer?.getSource()!
+          type: 'LineString'
         });
         break;
       case DrawTypes.MAPPOLYGON:
         this.draw = new Draw({
-          type: 'Polygon',
-          source:this.mapComponent.drawLayer?.getSource()!
+          type: 'Polygon'
         });
         break;
 
@@ -45,8 +42,27 @@ export class MapDrawDirective {
         const feature = res.feature;
         const geometry = feature.getGeometry();
         const type = geometry?.getType();
-        const coordinates = (geometry as any).getCoordinates()
-        const bgFeature = new BgFeature(coordinates[0], type)
+        let bgFeatureType: FeatureTypes;
+        let coordinates : Array<[]> | undefined;
+        const cloneGeom = geometry?.clone()
+        const translatedGeom = cloneGeom?.transform('EPSG:3857' , 'EPSG:4326')
+        switch (type) {
+          case 'Point':
+            bgFeatureType = FeatureTypes.POINT;
+            coordinates = [(translatedGeom as any).getCoordinates()]
+            break;
+          case 'LineString':
+            bgFeatureType = FeatureTypes.LINESTRING;
+            coordinates = (translatedGeom as any).getCoordinates()
+            break;
+          case 'Polygon':
+            bgFeatureType = FeatureTypes.POLYGON;
+            coordinates = (translatedGeom as any).getCoordinates()[0]
+            break;
+          default:
+            break;
+        }
+        const bgFeature = new BgFeature(coordinates!, bgFeatureType!)
         this.drawManagerService.endDrawing(bgFeature, DrawSource.MAP)
       })
     })

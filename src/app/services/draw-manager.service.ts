@@ -46,12 +46,16 @@ export class DrawManagerService {
   }
 }
 
+/**
+ * @param  {Array<[]>}  Coordinates 
+ * @param {FeatureTypes} type 
+ */
 export class BgFeature {
 
   coordinates;
   type;
 
-  constructor(coordinates: [] | [][], type: FeatureTypes) {
+  constructor(coordinates: Array<[]>, type: FeatureTypes) {
     this.coordinates = coordinates;
     this.type = type;
   }

@@ -1,3 +1,5 @@
+import { LineString, Point, Polygon } from 'ol/geom';
+import { DrawManagerService, FeatureTypes } from './../../services/draw-manager.service';
 import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import Map from 'ol/Map';
@@ -7,6 +9,7 @@ import View from 'ol/View';
 import { fromLonLat } from 'ol/proj';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
+import { Feature } from 'ol';
 
 @Component({
   selector: 'bg-map',
@@ -16,10 +19,10 @@ import VectorSource from 'ol/source/Vector';
 export class MapComponent implements AfterViewInit {
 
   mapInitilized: ReplaySubject<Map> = new ReplaySubject()
-  drawLayer : VectorLayer<VectorSource> | undefined;
+  drawLayer: VectorLayer<VectorSource> | undefined;
   // map : any;
 
-  constructor() { }
+  constructor(private drawManagerService: DrawManagerService) { }
 
 
   ngAfterViewInit(): void {
@@ -40,10 +43,29 @@ export class MapComponent implements AfterViewInit {
 
     map.addLayer(this.drawLayer);
 
+    this.drawManagerService.endDraw.subscribe(res => {
+      const bgFeature = res.feature;
+      let geometry;
+      switch (bgFeature.type) {
+        case FeatureTypes.POINT:
+          geometry = new Point(bgFeature.coordinates[0]);
+          break;
+        case FeatureTypes.LINESTRING:
+          geometry = new LineString(bgFeature.coordinates);
+          break;
+        case FeatureTypes.POLYGON:
+          geometry = new Polygon([bgFeature.coordinates]);
+          break;
+
+        default:
+          break;
+      }
+      const translatedGeom = geometry?.transform('EPSG:4326', 'EPSG:3857')
+      const feature = new Feature(translatedGeom);
+      this.drawLayer?.getSource()?.addFeature(feature);
+    })
+
     this.mapInitilized.next(map);
-
-    // this.map = map;
-
   }
 
 }
