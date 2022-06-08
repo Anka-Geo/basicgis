@@ -1,27 +1,16 @@
-# Basicgis
+# Started
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.1.
+cd .. && ng new --package-manager yarn --style scss --skip-tests true --prefix bg basicgis
 
-## Development server
+# INFO
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+sidebar üzerinden veriyi değiştiriyoruz map üzerinden o veriyi işliyoruz.
+sidebar layer'ın visible'ını true, false yapıyor.
 
-## Code scaffolding
+# DAY 2
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+=> layer.service.ts üzerinden url içerisinde ki verileri alıyoruz ve services'e atıyoruz.
+=> daha sonsrasında aldığımız verileri tile-layer.directive'in içerisinde sadece service.type'ı vector olanları layer.directive'e yönlendiriyoruz.
+=> tile-layer.directive'de vector serviceslerinin url'ine wms isteği atıyoruz.
+=> daha sonrasında layer directive'e yönlendirirken layer.directive'e layer'ın visible ve name değerlerini gönderiyoruz.
+=> daha sonra bu visible değerine göre tile-layer.directive'mizin params ve visible değerlerini değiştirerek harita üzerinde ki gösterimi düzenleyebiliyoruz.
