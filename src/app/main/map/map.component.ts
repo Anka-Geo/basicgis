@@ -10,6 +10,7 @@ import { fromLonLat } from 'ol/proj';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import { Feature } from 'ol';
+import XYZ from 'ol/source/XYZ';
 
 @Component({
   selector: 'bg-map',
@@ -34,7 +35,9 @@ export class MapComponent implements AfterViewInit {
     }))
 
     map.addLayer(new TileLayer({
-      source: new OSM(),
+      source: new XYZ({
+        url:'http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}'
+      }),
     }))
 
     this.drawLayer = new VectorLayer({

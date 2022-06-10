@@ -26,6 +26,7 @@ import { GeojsonLayerDirective } from './main/threed/geojson-layer.directive';
 import { TilesetLayerDirective } from './main/threed/tileset-layer.directive';
 import { MapDrawDirective } from './main/map/map-draw.directive';
 import { PanoDrawDirective } from './main/pano/pano-draw.directive';
+import { ThreedDrawDirective } from './main/threed/threed-draw.directive';
 
 const primengModules = [SidebarModule, ButtonModule, SplitterModule,
   AccordionModule, CheckboxModule, MenubarModule]
@@ -46,7 +47,8 @@ const primengModules = [SidebarModule, ButtonModule, SplitterModule,
     GeojsonLayerDirective,
     TilesetLayerDirective,
     MapDrawDirective,
-    PanoDrawDirective
+    PanoDrawDirective,
+    ThreedDrawDirective
   ],
   imports: [
     BrowserModule,

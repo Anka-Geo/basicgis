@@ -42,6 +42,9 @@
                             </bg-tileset-layer>
                         </ng-container>
                     </ng-container>
+                    <bg-threed-draw *ngIf="drawStatus === drawTypes.THREEDPOINT || 
+                    drawStatus === drawTypes.THREEDLINESTRING || 
+                    drawStatus === drawTypes.THREEDPOLYGON" [drawType]="drawStatus"></bg-threed-draw>
                 </bg-threed>
             </div>
         </div>
