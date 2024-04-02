@@ -20,9 +20,9 @@ export class PanoComponent implements OnInit {
 
     const ankapanapiOptions = {
       content: 'panodiv',
-      aroundService: 'https://atlant-dev.ankageo.com/pano/around/',
-      imageService: 'https://atlant-dev.ankageo.com/pano/img/',
-      tileService: 'https://atlant-dev.ankageo.com//pano/tile/'
+      aroundService: 'http://10.33.88.53/pano/around/',
+      imageService: 'http://10.33.88.53/pano/img/',
+      tileService: 'http://10.33.88.53/pano/tile/'
     };
 
     this.pano = new (window as any).AnkaPanAPI.PanoGLV2(ankapanapiOptions)
@@ -36,7 +36,7 @@ export class PanoComponent implements OnInit {
     this.draw = new (window as any).AnkaDraw.DrawPlugin();
     this.pano.setPlugin(this.draw);
 
-    this.pano.gotoLocation(41.046813254, 28.953913387);
+    this.pano.gotoLocation(40.421388, 49.916749);
     this.pano.start();
     this.pano.addEvent(this.PanoGL.LOCATION_CHANGE, null, this.onLocationChange);
     (window as any).pano = this.pano;

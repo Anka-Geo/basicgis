@@ -56,7 +56,7 @@ export class MapComponent implements AfterViewInit {
     const map = new Map({ target: 'map', controls: [] });
 
     map.setView(new View({
-      center: fromLonLat([28.942838, 41.042689]),
+      center: fromLonLat([49.916749, 40.421388]),
       zoom: 14,
     }))
 
