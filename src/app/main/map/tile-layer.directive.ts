@@ -18,7 +18,7 @@ export class TileLayerDirective {
       visible: false,
       source: new TileWMS({
         url: this.url + "/wms",
-        params: { 'TILED': true },
+        params: { 'TILED': true, token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOjE5NzQsImlhdCI6MTcxMjA0NjkyNywiZXhwIjoxNzEyMDkwMTI3fQ.H3MbVnATBZ1I3-XN4kfPIlCi0_PmCPxyrkwydjpaZoA'},
         serverType: 'geoserver'
       })
     });
