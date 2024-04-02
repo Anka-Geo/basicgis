@@ -14,7 +14,7 @@ export class LayerService {
   }
 
   getLayers() {
-    this.http.get('https://dev-gis.ankageo.com/rest/v1/services').subscribe({
+    this.http.get('https://atlant-dev.ankageo.com/rest/v1/services').subscribe({
       next: (layers: any) => { //todo
         this.services.next(layers.services.services)
       },

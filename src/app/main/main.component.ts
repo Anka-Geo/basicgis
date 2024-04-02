@@ -11,7 +11,7 @@ export class MainComponent implements OnInit {
 
   services: any;
   drawStatus: DrawTypes | undefined;
-
+  currentPanoLocation = [0, 0];
   get drawTypes() {
     return DrawTypes;
   }
@@ -27,6 +27,9 @@ export class MainComponent implements OnInit {
     this.drawManager.startDraw.subscribe(res => {
       this.drawStatus = res;
     })
+  }
+  setCoords(coords:any){
+    this.currentPanoLocation = coords;
   }
 
 }

@@ -1,9 +1,9 @@
 <p-splitter [style]="{'height': '100%'}" [panelSizes]="[65,35]">
     <ng-template pTemplate>
         <div class="col flex align-items-center justify-content-center" style="width: 100%;height: 100%;">
-            <bg-map>
+            <bg-map [coordinate]="currentPanoLocation">
                 <ng-container *ngFor="let service of services">
-                    <bgTileLayer *ngIf="service.type === 'VECTOR'" [url]="service.url">
+                    <bgTileLayer *ngIf="service.type === 'VECTOR' || service.type === 'PANOGPS'" [url]="service.url">
                         <bgLayer *ngFor="let layer of service.layers" [visible]="layer.visible"
                             [layerName]="layer.name"></bgLayer>
                     </bgTileLayer>
@@ -16,8 +16,8 @@
     </ng-template>
     <ng-template pTemplate>
         <div style="height:100%;width: 100%;display: flex;flex-direction: column;">
-            <div style="height:50%;background-color: aqua;">
-                <bg-pano>
+            <div style="height:100%;background-color: aqua;">
+                <bg-pano (setCoords)="setCoords($event)">
                     <ng-container *ngFor="let service of services">
                         <ng-container *ngIf="service.type === 'VECTOR'">
                             <bg-pano-wfsLayer *ngFor="let layer of service.layers" [url]="service.url"
@@ -29,23 +29,6 @@
                     drawStatus === drawTypes.PANOLINESTRING || 
                     drawStatus === drawTypes.PANOPOLYGON" [drawType]="drawStatus"></bg-pano-draw>
                 </bg-pano>
-            </div>
-            <div style="height:50%;background-color: brown;">
-                <bg-threed>
-                    <ng-container *ngFor="let service of services">
-                        <ng-container *ngIf="service.type === 'VECTOR'">
-                            <bg-geojson-layer *ngFor="let layer of service.layers" [url]="service.url"
-                                [name]="layer.name" [visible]="layer.visible">
-                            </bg-geojson-layer>
-                            <bg-tileset-layer
-                                url="https://cesium-api.ankageo.com/api/v1/static/tileset/135/tileset.json">
-                            </bg-tileset-layer>
-                        </ng-container>
-                    </ng-container>
-                    <bg-threed-draw *ngIf="drawStatus === drawTypes.THREEDPOINT || 
-                    drawStatus === drawTypes.THREEDLINESTRING || 
-                    drawStatus === drawTypes.THREEDPOLYGON" [drawType]="drawStatus"></bg-threed-draw>
-                </bg-threed>
             </div>
         </div>
     </ng-template>

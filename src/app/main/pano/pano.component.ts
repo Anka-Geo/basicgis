@@ -1,6 +1,6 @@
 import { DrawManagerService, FeatureTypes } from './../../services/draw-manager.service';
-import { Component, OnInit } from '@angular/core';
-
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { toLonLat, fromLonLat } from 'ol/proj';
 @Component({
   selector: 'bg-pano',
   templateUrl: './pano.component.html',
@@ -10,6 +10,9 @@ export class PanoComponent implements OnInit {
 
   pano: any;
   draw: any;
+  PanoGL: any;
+  
+  @Output() setCoords = new EventEmitter<any>();
 
   constructor(private drawManagerService: DrawManagerService) { }
 
@@ -17,13 +20,13 @@ export class PanoComponent implements OnInit {
 
     const ankapanapiOptions = {
       content: 'panodiv',
-      aroundService: 'https://dev-gis.ankageo.com/pano/around/',
-      imageService: 'https://dev-gis.ankageo.com/pano/img/',
-      tileService: 'https://dev-gis.ankageo.com//pano/tile/'
+      aroundService: 'https://atlant-dev.ankageo.com/pano/around/',
+      imageService: 'https://atlant-dev.ankageo.com/pano/img/',
+      tileService: 'https://atlant-dev.ankageo.com//pano/tile/'
     };
 
     this.pano = new (window as any).AnkaPanAPI.PanoGLV2(ankapanapiOptions)
-
+    this.PanoGL = (window as any).AnkaPanAPI.PanoGLV2;
     const softtext = new (window as any).AnkaSoftText.SoftTextPlugin();
     this.pano.setPlugin(softtext);
 
@@ -35,6 +38,7 @@ export class PanoComponent implements OnInit {
 
     this.pano.gotoLocation(41.046813254, 28.953913387);
     this.pano.start();
+    this.pano.addEvent(this.PanoGL.LOCATION_CHANGE, null, this.onLocationChange);
     (window as any).pano = this.pano;
 
     const sketchLayer = new (window as any).AnkaScalable.Layer();
@@ -71,4 +75,9 @@ export class PanoComponent implements OnInit {
       sketchLayer.refresh();
     })
   }
+  onLocationChange = (event: any) => {
+    const translated = fromLonLat([event.lon, event.lat]);
+    this.setCoords.next(translated)
+  }
+
 }
